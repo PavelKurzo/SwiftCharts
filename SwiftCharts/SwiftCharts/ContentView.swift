@@ -23,18 +23,30 @@ struct ContentView: View {
     Item(type: "Mgmt", value: 130),
     ]
     
-    
     var body: some View {
         NavigationView {
             ScrollView {
-                // bar, line, ruler, point
                 Chart(items) { item in
                     BarMark(
                         x: .value("Department", item.type),
                         y: .value("Profit", item.value)
                     )
-                    .foregroundStyle(Color.green.gradient)
+                    .foregroundStyle(by: .value("Department", item.type))
+                    .opacity(0.5)
+                    .symbol(by: .value("Department", item.type))
+
+                    RuleMark(
+                        y: .value("Average", 59)
+                    )
+                    .lineStyle(StrokeStyle(lineWidth: 3))
+                    .annotation(position: .top, alignment: .leading) {
+                        Text("Average")
+                    }
                 }
+                .foregroundStyle(.purple)
+                .chartPlotStyle(content: { plotArea in
+                    plotArea.background(.green.opacity(0.3))
+                })
                 .frame(height: 200)
                 .padding()
                 
@@ -63,7 +75,8 @@ struct ContentView: View {
                         x: .value("Department", item.type),
                         y: .value("Profit", item.value)
                     )
-                    .foregroundStyle(Color.yellow.gradient)
+                    .foregroundStyle(by: .value("Department", item.type))
+                    .symbol(by: .value("Department", item.type))
                 }
                 .frame(height: 200)
                 .padding()
