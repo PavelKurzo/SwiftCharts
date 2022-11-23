@@ -98,7 +98,7 @@ struct ContentView: View {
                     .foregroundStyle(Color.orange.gradient)
                 }
                 .frame(height: 200)
-                .padding()
+                .padding()                
             }
             .navigationTitle("Charts")
         }
